@@ -13,7 +13,6 @@ function GameBoard (){
     const [gameStarted, gameStart] = useState(false);
     let tiles = [];
     let gridColumns = '';
-    let correctTilesStorage = [];
     let winMessage;
 
     const startGame = () => {
@@ -21,13 +20,12 @@ function GameBoard (){
             gameStart(true);
             for (let i = 0; i < difficulty; i++) {
                 let number = Math.floor(Math.random() * (difficulty * difficulty)) + 1;
-                if (correctTilesStorage.indexOf(number) < 0) {
-                    correctTilesStorage.push(number);
+                if (correctTiles.indexOf(number) < 0) {
+                    updateCorrectTiles(correctTiles => [...correctTiles, number]);
                 } else { 
                     i--;
                 }
             }
-            updateCorrectTiles(correctTilesStorage);
             updateTimer(true);
             setTimeout(() => {
                 updateTimer(false);
